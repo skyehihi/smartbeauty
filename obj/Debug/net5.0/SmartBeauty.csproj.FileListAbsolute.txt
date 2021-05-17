@@ -317,11 +317,6 @@ D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\SmartBeauty.TagHelpers.output.ca
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\SmartBeauty.RazorCoreGenerate.cache
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\About.cshtml.g.cs
-D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Appointments\Create.cshtml.g.cs
-D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Appointments\Delete.cshtml.g.cs
-D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Appointments\Details.cshtml.g.cs
-D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Appointments\Edit.cshtml.g.cs
-D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Appointments\Index.cshtml.g.cs
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Clients\Create.cshtml.g.cs
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Clients\Delete.cshtml.g.cs
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Clients\Details.cshtml.g.cs
@@ -348,3 +343,8 @@ D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\SmartBeauty.dll
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\ref\SmartBeauty.dll
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\SmartBeauty.pdb
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\SmartBeauty.genruntimeconfig.cache
+D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Appointments\Create.cshtml.g.cs
+D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Appointments\Delete.cshtml.g.cs
+D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Appointments\Details.cshtml.g.cs
+D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Appointments\Edit.cshtml.g.cs
+D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Appointments\Index.cshtml.g.cs

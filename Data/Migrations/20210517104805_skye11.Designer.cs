@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartBeauty.Data;
 
 namespace SmartBeauty.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210517104805_skye11")]
+    partial class skye11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,11 +237,17 @@ namespace SmartBeauty.Data.Migrations
                     b.Property<int>("SalonID")
                         .HasColumnType("int");
 
+                    b.Property<int>("TimeSpotID")
+                        .HasColumnType("int");
+
                     b.HasKey("AppointmentID");
 
                     b.HasIndex("ClientID");
 
                     b.HasIndex("SalonID");
+
+                    b.HasIndex("TimeSpotID")
+                        .IsUnique();
 
                     b.ToTable("Appointment");
                 });
@@ -369,6 +377,22 @@ namespace SmartBeauty.Data.Migrations
                     b.ToTable("Staff");
                 });
 
+            modelBuilder.Entity("SmartBeauty.Models.TimeSpot", b =>
+                {
+                    b.Property<int>("TimeSpotID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("TimeSpotName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("TimeSpotID");
+
+                    b.ToTable("TimeSpot");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -434,9 +458,17 @@ namespace SmartBeauty.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SmartBeauty.Models.TimeSpot", "TimeSpot")
+                        .WithOne("Appointments")
+                        .HasForeignKey("SmartBeauty.Models.Appointment", "TimeSpotID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Client");
 
                     b.Navigation("Salon");
+
+                    b.Navigation("TimeSpot");
                 });
 
             modelBuilder.Entity("SmartBeauty.Models.SalonService", b =>
@@ -488,6 +520,11 @@ namespace SmartBeauty.Data.Migrations
                     b.Navigation("Appointments");
 
                     b.Navigation("Services");
+                });
+
+            modelBuilder.Entity("SmartBeauty.Models.TimeSpot", b =>
+                {
+                    b.Navigation("Appointments");
                 });
 #pragma warning restore 612, 618
         }

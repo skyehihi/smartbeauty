@@ -38,7 +38,7 @@ namespace SmartBeauty.Pages.Appointments
             {
                 return NotFound();
             }
-           ViewData["ClientID"] = new SelectList(_context.Client, "ClientID", "ClientID");
+           ViewData["ClientID"] = new SelectList(_context.Client, "ClientID", "LastName");
            ViewData["SalonID"] = new SelectList(_context.Salon, "SalonID", "SalonID");
             return Page();
         }
