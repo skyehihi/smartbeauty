@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Github\\skyehihi\\smartbeauty\\SmartBeauty.csproj": {}
+    "C:\\Users\\mtran\\Source\\Repos\\skyehihi\\smartbeauty\\SmartBeauty.csproj": {}
   },
   "projects": {
-    "D:\\Github\\skyehihi\\smartbeauty\\SmartBeauty.csproj": {
+    "C:\\Users\\mtran\\Source\\Repos\\skyehihi\\smartbeauty\\SmartBeauty.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\skyehihi\\smartbeauty\\SmartBeauty.csproj",
+        "projectUniqueName": "C:\\Users\\mtran\\Source\\Repos\\skyehihi\\smartbeauty\\SmartBeauty.csproj",
         "projectName": "SmartBeauty",
-        "projectPath": "D:\\Github\\skyehihi\\smartbeauty\\SmartBeauty.csproj",
-        "packagesPath": "C:\\Users\\SkyeNguyen\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\skyehihi\\smartbeauty\\obj\\",
+        "projectPath": "C:\\Users\\mtran\\Source\\Repos\\skyehihi\\smartbeauty\\SmartBeauty.csproj",
+        "packagesPath": "C:\\Users\\mtran\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mtran\\Source\\Repos\\skyehihi\\smartbeauty\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\SkyeNguyen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mtran\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,7 +22,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.telerik.com/nuget": {}
         },
         "frameworks": {
           "net5.0": {
@@ -83,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

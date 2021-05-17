@@ -25,7 +25,7 @@ namespace SmartBeauty.Pages.Salons
         }
 
         [BindProperty]
-        public Salon Salon { get; set; }
+        public SmartBeauty.Models.Salon Salon { get; set; }
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
@@ -35,10 +35,20 @@ namespace SmartBeauty.Pages.Salons
                 return Page();
             }
 
-            _context.Salon.Add(Salon);
-            await _context.SaveChangesAsync();
+            var emptySalon = new SmartBeauty.Models.Salon();
 
-            return RedirectToPage("./Index");
+            if (await TryUpdateModelAsync<SmartBeauty.Models.Salon>(
+                emptySalon,
+                "salon",// Prefix for form value.
+                s => s.SalonName, s => s.Email, s => s.Address, s => s.PhoneNumber))
+            {
+                _context.Salon.Add(emptySalon);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+
+            return null;
+
         }
     }
 }
