@@ -26,6 +26,7 @@ namespace SmartBeauty.Models
         public DateTime HireDate { get; set; }
 
         [Display(Name = "Full Name")]
+        public int SalonID { get; set; }
         public string FullName
         {
             get { return LastName + ", " + FirstMidName; }
