@@ -17,7 +17,6 @@ namespace SmartBeauty.Data
         public DbSet<SmartBeauty.Models.Salon> Salon { get; set; }
         public DbSet<SmartBeauty.Models.Service> Services { get; set; }
         public DbSet<SmartBeauty.Models.Staff> Staff { get; set; }
-        public DbSet<SmartBeauty.Models.SalonService> SalonServices { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -26,10 +25,9 @@ namespace SmartBeauty.Data
             modelBuilder.Entity<SmartBeauty.Models.Client>().ToTable("Client");
             modelBuilder.Entity<SmartBeauty.Models.Staff>().ToTable("Staff");
             modelBuilder.Entity<SmartBeauty.Models.Service>().ToTable("Service");
-            modelBuilder.Entity<SmartBeauty.Models.SalonService>().ToTable("SalonService");
 
-            modelBuilder.Entity<SmartBeauty.Models.SalonService>()
-                .HasKey(c => new { c.SalonID, c.ServiceID });
+            //modelBuilder.Entity<SmartBeauty.Models.SalonService>()
+            //    .HasKey(c => new { c.SalonID, c.ServiceID });
         }
 
 

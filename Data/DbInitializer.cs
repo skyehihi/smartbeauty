@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using SmartBeauty.Models;
 
 
@@ -30,11 +30,9 @@ namespace SmartBeauty.Models
             new Client{FirstName="Laura",LastName="Norman",DateOfBirth=DateTime.Parse("2003-09-01")},
             new Client{FirstName="Nino",LastName="Olivetto",DateOfBirth=DateTime.Parse("2005-09-01")}
             };
-            foreach (Client c in clients)
-            {
-                context.Client.Add(c);
-            }
+            context.Client.AddRange(clients);
             context.SaveChanges();
+
 
             var salons = new Salon[]
             {
@@ -52,8 +50,83 @@ namespace SmartBeauty.Models
             }
             context.SaveChanges();
 
-            var appointments = new Appointment[]
+            var staffs = new Staff[]
+            {
+                new Staff { FirstMidName = "Kim",     LastName = "Abercrombie",
+                    HireDate = DateTime.Parse("1995-03-11"),
+                    SalonID  = salons.Single( i => i.SalonName == "Chemistry").SalonID },
+                new Staff { FirstMidName = "Fadi",    LastName = "Fakhouri",
+                    HireDate = DateTime.Parse("2002-07-06"),
+                    SalonID  = salons.Single( i => i.SalonName == "Microeconomics").SalonID },
+                new Staff { FirstMidName = "Roger",   LastName = "Harui",
+                    HireDate = DateTime.Parse("1998-07-01"),
+                    SalonID  = salons.Single( i => i.SalonName == "Microeconomics").SalonID },
+                new Staff { FirstMidName = "Candace", LastName = "Kapoor",
+                    HireDate = DateTime.Parse("2001-01-15"),
+                    SalonID  = salons.Single( i => i.SalonName == "Microeconomics").SalonID },
+                new Staff { FirstMidName = "Roger",   LastName = "Zheng",
+                    HireDate = DateTime.Parse("2004-02-12"),
+                    SalonID  = salons.Single( i => i.SalonName == "Literature").SalonID },
+            };
+            context.Staff.AddRange(staffs);
+            context.SaveChanges();
+
+            var services = new Service[]
+            {
+                new Service { ServiceName = "Man Cut",     Price = 50000, 
+                    SalonID  = salons.Single( i => i.SalonName == "Literature").SalonID },
+                new Service { ServiceName = "Perm", Price = 100000, 
+                    SalonID  = salons.Single( i => i.SalonName == "Microeconomics").SalonID },
+                new Service { ServiceName = "Hair Straighthen", Price = 350000, 
+                    SalonID  = salons.Single( i => i.SalonName == "Microeconomics").SalonID  },
+                new Service { ServiceName = "Hair Color",   Price = 120000,
+                    SalonID  = salons.Single( i => i.SalonName == "Chemistry").SalonID}
+            };
+
+            context.Services.AddRange(services);
+            context.SaveChanges();
+
+            //var salonservices = new SalonService[]
             //{
+            //    new SalonService {
+            //        SalonID = salons.Single(c => c.SalonName == "Chemistry" ).SalonID,
+            //        ServiceID = services.Single(i => i.ServiceName == "Kapoor").ServiceID
+            //        },
+            //    //new SalonService {
+            //    //    SalonID = salons.Single(c => c.SalonName == "Chemistry" ).SalonID,
+            //    //    ServiceID = services.Single(i => i.ServiceName == "Harui").ServiceID
+            //    //    },
+            //    //new SalonService {
+            //    //    SalonID = salons.Single(c => c.SalonName == "Microeconomics" ).SalonID,
+            //    //    ServiceID = services.Single(i => i.ServiceName == "Zheng").ServiceID
+            //    //    },
+            //    //new SalonService {
+            //    //    SalonID = salons.Single(c => c.SalonName == "Macroeconomics" ).SalonID,
+            //    //    ServiceID = services.Single(i => i.ServiceName == "Zheng").ServiceID
+            //    //    },
+            //    //new SalonService {
+            //    //    SalonID = salons.Single(c => c.SalonName == "Calculus" ).SalonID,
+            //    //    ServiceID = services.Single(i => i.ServiceName == "Fakhouri").ServiceID
+            //    //    },
+            //    //new SalonService {
+            //    //    SalonID = salons.Single(c => c.SalonName == "Trigonometry" ).SalonID,
+            //    //    ServiceID = services.Single(i => i.ServiceName == "Harui").ServiceID
+            //    //    },
+            //    //new SalonService {
+            //    //    SalonID = salons.Single(c => c.SalonName == "Composition" ).SalonID,
+            //    //    ServiceID = services.Single(i => i.ServiceName == "Abercrombie").ServiceID
+            //    //    },
+            //    //new SalonService {
+            //    //    SalonID = salons.Single(c => c.SalonName == "Literature" ).SalonID,
+            //    //    ServiceID = services.Single(i => i.ServiceName == "Abercrombie").ServiceID
+            //    //    },
+            //};
+
+            //context.SalonServices.AddRange(salonservices);
+            //context.SaveChanges();
+
+            var appointments = new Appointment[]
+            //            {
             //new Appointment{ClientID=1,SalonID=1050,BookingDate=DateTime.Parse("2021-05-01")},
             //new Appointment{ClientID=1,SalonID=4022,BookingDate=DateTime.Parse("2021-05-04")},
             //new Appointment{ClientID=1,SalonID=4041,BookingDate=DateTime.Parse("2021-05-02")},
@@ -72,8 +145,7 @@ namespace SmartBeauty.Models
             //    context.Appointment.Add(a);
             //}
             //context.SaveChanges();
-            //var appointments = new Appointment[]
-                {
+            {
                 new Appointment {
                     ClientID = clients.Single(s => s.LastName == "Alexander").ClientID,
                     SalonID = salons.Single(c => c.SalonName == "Chemistry" ).SalonID,
@@ -143,8 +215,8 @@ namespace SmartBeauty.Models
                 }
             }
             context.SaveChanges();
- 
 
+
+        }
     }
-}
 }

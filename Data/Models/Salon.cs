@@ -14,5 +14,6 @@ namespace SmartBeauty.Models
 
         public ICollection<Appointment> Appointments { get; set; }
         public ICollection<Service> Services { get; set; }
+        public ICollection<Staff> Staffs { get; set; }
     }
 }

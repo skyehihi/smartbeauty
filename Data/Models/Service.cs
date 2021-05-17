@@ -16,6 +16,8 @@ namespace SmartBeauty.Models
         [Column(TypeName = "money")]
         public decimal Price { get; set; }
 
+        public int SalonID { get; set; }
+
         public Salon Salons { get; set; }
     }
 }

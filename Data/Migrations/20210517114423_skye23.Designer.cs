@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartBeauty.Data;
 
 namespace SmartBeauty.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210517114423_skye23")]
+    partial class skye23
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -299,6 +301,21 @@ namespace SmartBeauty.Data.Migrations
                     b.ToTable("Salon");
                 });
 
+            modelBuilder.Entity("SmartBeauty.Models.SalonService", b =>
+                {
+                    b.Property<int>("SalonID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceID")
+                        .HasColumnType("int");
+
+                    b.HasKey("SalonID", "ServiceID");
+
+                    b.HasIndex("ServiceID");
+
+                    b.ToTable("SalonService");
+                });
+
             modelBuilder.Entity("SmartBeauty.Models.Service", b =>
                 {
                     b.Property<int>("ServiceID")
@@ -309,16 +326,11 @@ namespace SmartBeauty.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("money");
 
-                    b.Property<int>("SalonID")
-                        .HasColumnType("int");
-
                     b.Property<string>("ServiceName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("ServiceID");
-
-                    b.HasIndex("SalonID");
 
                     b.ToTable("Service");
                 });
@@ -424,15 +436,23 @@ namespace SmartBeauty.Data.Migrations
                     b.Navigation("Salon");
                 });
 
-            modelBuilder.Entity("SmartBeauty.Models.Service", b =>
+            modelBuilder.Entity("SmartBeauty.Models.SalonService", b =>
                 {
                     b.HasOne("SmartBeauty.Models.Salon", "Salons")
-                        .WithMany("Services")
+                        .WithMany("SalonServices")
                         .HasForeignKey("SalonID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SmartBeauty.Models.Service", "Services")
+                        .WithMany("SalonServices")
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Salons");
+
+                    b.Navigation("Services");
                 });
 
             modelBuilder.Entity("SmartBeauty.Models.Staff", b =>
@@ -455,9 +475,14 @@ namespace SmartBeauty.Data.Migrations
                 {
                     b.Navigation("Appointments");
 
-                    b.Navigation("Services");
+                    b.Navigation("SalonServices");
 
                     b.Navigation("Staffs");
+                });
+
+            modelBuilder.Entity("SmartBeauty.Models.Service", b =>
+                {
+                    b.Navigation("SalonServices");
                 });
 #pragma warning restore 612, 618
         }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartBeauty.Data;
 
 namespace SmartBeauty.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210517112746_skye14")]
+    partial class skye14
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -299,6 +301,21 @@ namespace SmartBeauty.Data.Migrations
                     b.ToTable("Salon");
                 });
 
+            modelBuilder.Entity("SmartBeauty.Models.SalonService", b =>
+                {
+                    b.Property<int>("SalonID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceID")
+                        .HasColumnType("int");
+
+                    b.HasKey("SalonID", "ServiceID");
+
+                    b.HasIndex("ServiceID");
+
+                    b.ToTable("SalonService");
+                });
+
             modelBuilder.Entity("SmartBeauty.Models.Service", b =>
                 {
                     b.Property<int>("ServiceID")
@@ -309,7 +326,7 @@ namespace SmartBeauty.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("money");
 
-                    b.Property<int>("SalonID")
+                    b.Property<int?>("SalonsSalonID")
                         .HasColumnType("int");
 
                     b.Property<string>("ServiceName")
@@ -318,7 +335,7 @@ namespace SmartBeauty.Data.Migrations
 
                     b.HasKey("ServiceID");
 
-                    b.HasIndex("SalonID");
+                    b.HasIndex("SalonsSalonID");
 
                     b.ToTable("Service");
                 });
@@ -424,13 +441,30 @@ namespace SmartBeauty.Data.Migrations
                     b.Navigation("Salon");
                 });
 
+            modelBuilder.Entity("SmartBeauty.Models.SalonService", b =>
+                {
+                    b.HasOne("SmartBeauty.Models.Salon", "Salon")
+                        .WithMany()
+                        .HasForeignKey("SalonID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SmartBeauty.Models.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Salon");
+
+                    b.Navigation("Service");
+                });
+
             modelBuilder.Entity("SmartBeauty.Models.Service", b =>
                 {
                     b.HasOne("SmartBeauty.Models.Salon", "Salons")
                         .WithMany("Services")
-                        .HasForeignKey("SalonID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SalonsSalonID");
 
                     b.Navigation("Salons");
                 });
@@ -438,7 +472,7 @@ namespace SmartBeauty.Data.Migrations
             modelBuilder.Entity("SmartBeauty.Models.Staff", b =>
                 {
                     b.HasOne("SmartBeauty.Models.Salon", "Salons")
-                        .WithMany("Staffs")
+                        .WithMany()
                         .HasForeignKey("SalonID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -456,8 +490,6 @@ namespace SmartBeauty.Data.Migrations
                     b.Navigation("Appointments");
 
                     b.Navigation("Services");
-
-                    b.Navigation("Staffs");
                 });
 #pragma warning restore 612, 618
         }
