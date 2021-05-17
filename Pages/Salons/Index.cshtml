@@ -1,0 +1,54 @@
+﻿@page
+@model SmartBeauty.Pages.Salons.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Salon[0].SalonName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salon[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salon[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salon[0].PhoneNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Salon) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalonName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.SalonID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.SalonID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.SalonID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

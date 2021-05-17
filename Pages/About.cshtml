@@ -1,0 +1,31 @@
+﻿@page
+@model SmartBeauty.Pages.AboutModel
+
+@{
+    ViewData["Title"] = "Client Body Statistics";
+}
+
+<h2>Client Body Statistics</h2>
+
+<table>
+    <tr>
+        <th>
+            Date Of Birth
+        </th>
+        <th>
+            Clients
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Client)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @item.ClientCount
+            </td>
+        </tr>
+    }
+</table>
