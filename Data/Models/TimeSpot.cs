@@ -8,9 +8,8 @@ namespace SmartBeauty.Models
         [Key]
         public int TimeSpotID { get; set; }
         [StringLength(50)]
-        [Display(Name = "Office Location")]
+        [Display(Name = "Time Spot Name")]
         public string TimeSpotName { get; set; }
-
-        //public ICollection<Appointment> Appointments { get; set; }
+        public Appointment Appointments { get; set; }
     }
 }

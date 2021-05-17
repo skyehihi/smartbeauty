@@ -11,7 +11,10 @@ namespace SmartBeauty.Models
         public int ClientID { get; set; }
         public int SalonID { get; set; }
         public DateTime BookingDate { get; set; }
+
+        public int TimeSpotID { get; set; }
         public Client Client { get; set; }
         public Salon Salon { get; set; }
+        public TimeSpot TimeSpot { get; set; }
     }
 }

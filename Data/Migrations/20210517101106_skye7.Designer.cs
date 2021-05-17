@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartBeauty.Data;
 
 namespace SmartBeauty.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210517101106_skye7")]
+    partial class skye7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,8 +246,7 @@ namespace SmartBeauty.Data.Migrations
 
                     b.HasIndex("SalonID");
 
-                    b.HasIndex("TimeSpotID")
-                        .IsUnique();
+                    b.HasIndex("TimeSpotID");
 
                     b.ToTable("Appointment");
                 });
@@ -303,30 +304,6 @@ namespace SmartBeauty.Data.Migrations
                     b.HasKey("SalonID");
 
                     b.ToTable("Salon");
-                });
-
-            modelBuilder.Entity("SmartBeauty.Models.Service", b =>
-                {
-                    b.Property<int>("ServiceID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("money");
-
-                    b.Property<int?>("SalonsSalonID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ServiceName")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("ServiceID");
-
-                    b.HasIndex("SalonsSalonID");
-
-                    b.ToTable("Service");
                 });
 
             modelBuilder.Entity("SmartBeauty.Models.TimeSpot", b =>
@@ -411,8 +388,8 @@ namespace SmartBeauty.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("SmartBeauty.Models.TimeSpot", "TimeSpot")
-                        .WithOne("Appointments")
-                        .HasForeignKey("SmartBeauty.Models.Appointment", "TimeSpotID")
+                        .WithMany()
+                        .HasForeignKey("TimeSpotID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -423,28 +400,12 @@ namespace SmartBeauty.Data.Migrations
                     b.Navigation("TimeSpot");
                 });
 
-            modelBuilder.Entity("SmartBeauty.Models.Service", b =>
-                {
-                    b.HasOne("SmartBeauty.Models.Salon", "Salons")
-                        .WithMany("Services")
-                        .HasForeignKey("SalonsSalonID");
-
-                    b.Navigation("Salons");
-                });
-
             modelBuilder.Entity("SmartBeauty.Models.Client", b =>
                 {
                     b.Navigation("Appointments");
                 });
 
             modelBuilder.Entity("SmartBeauty.Models.Salon", b =>
-                {
-                    b.Navigation("Appointments");
-
-                    b.Navigation("Services");
-                });
-
-            modelBuilder.Entity("SmartBeauty.Models.TimeSpot", b =>
                 {
                     b.Navigation("Appointments");
                 });
