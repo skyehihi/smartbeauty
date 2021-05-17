@@ -1,9 +1,7 @@
 ﻿@page
 @model SmartBeauty.Pages.Salons.DetailsModel
 
-@{
-    ViewData["Title"] = "Details";
-}
+@{ ViewData["Title"] = "Details"; }
 
 <h1>Details</h1>
 
@@ -17,52 +15,29 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Salon.SalonName)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Salon.Email)
+        <dt>
+            @Html.DisplayNameFor(model => model.Salon.Staffs)
         </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Salon.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Salon.Address)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Salon.Address)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Salon.PhoneNumber)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Salon.PhoneNumber)
+
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+                @foreach (var item in Model.Salon.Staffs)
+                {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstMidName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+    </tr>            }
+            </table>
         </dd>
     </dl>
-    <dt>
-        @Html.DisplayNameFor(model => model.Salon.Appointments)
-    </dt>
-    <dd>
-        <table class="table">
-            <tr>
-                <th>Customer First Name</th>
-                <th>Customer Last Name</th>
-                <th>Grade</th>
-            </tr>
-            @foreach (var item in Model.Salon.Appointments)
-            {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Client.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Client.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BookingDate)
-            </td>
-        </tr>
-            }
-        </table>
-    </dd>
-
 </div>
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Salon.SalonID">Edit</a> |

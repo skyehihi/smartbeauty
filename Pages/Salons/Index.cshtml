@@ -1,20 +1,31 @@
 ﻿@page
 @model SmartBeauty.Pages.Salons.IndexModel
 
-@{
-    ViewData["Title"] = "Index";
-}
+@{ ViewData["Title"] = "Index"; }
 
 <h1>Index</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-page="./Index">Back to full List</a>
+        </p>
+    </div>
+</form>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Salon[0].SalonName)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.SalonNameSort"
+                   asp-route-currentFilter="@Model.CurrentFilter">
+                    @Html.DisplayNameFor(model => model.Salon[0].SalonName)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Salon[0].Email)
@@ -29,26 +40,43 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Salon) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SalonName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.SalonID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.SalonID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.SalonID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Salon)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.SalonName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Address)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PhoneNumber)
+    </td>
+    <td>
+        <a asp-page="./Edit" asp-route-id="@item.SalonID">Edit</a> |
+        <a asp-page="./Details" asp-route-id="@item.SalonID">Details</a> |
+        <a asp-page="./Delete" asp-route-id="@item.SalonID">Delete</a>
+    </td>
+</tr>}
     </tbody>
 </table>
+@{ var prevDisabled = !Model.Salon.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.Salon.HasNextPage ? "disabled" : ""; }
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Salon.PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Salon.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>
