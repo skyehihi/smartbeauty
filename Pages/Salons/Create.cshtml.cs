@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using SmartBeauty.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using SmartBeauty.Data;
-using SmartBeauty.Models;
+using System.Threading.Tasks;
 
 namespace SmartBeauty.Pages.Salons
 {
-    public class CreateModel : PageModel
+    public class CreateModel : CityNamePageModel
     {
         private readonly SmartBeauty.Data.ApplicationDbContext _context;
 
@@ -18,16 +12,15 @@ namespace SmartBeauty.Pages.Salons
         {
             _context = context;
         }
-
         public IActionResult OnGet()
         {
+            PopulateCitysDropDownList(_context);
             return Page();
         }
 
         [BindProperty]
-        public SmartBeauty.Models.Salon Salon { get; set; }
+        public Salon Salon { get; set; }
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -35,20 +28,21 @@ namespace SmartBeauty.Pages.Salons
                 return Page();
             }
 
-            var emptySalon = new SmartBeauty.Models.Salon();
+            var emptySalon = new Salon();
 
-            if (await TryUpdateModelAsync<SmartBeauty.Models.Salon>(
-                emptySalon,
-                "salon",// Prefix for form value.
-                s => s.SalonName, s => s.Email, s => s.Address, s => s.PhoneNumber))
+            if (await TryUpdateModelAsync<Salon>(
+                 emptySalon,
+                 "Salon",   // Prefix for form value.
+                 s => s.SalonName, s => s.Address, s => s.PhoneNumber, s => s.Email))
             {
                 _context.Salon.Add(emptySalon);
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");
             }
 
-            return null;
-
+            // Select DepartmentID if TryUpdateModelAsync fails.
+            PopulateCitysDropDownList(_context, emptySalon.CityID);
+            return Page();
         }
     }
 }

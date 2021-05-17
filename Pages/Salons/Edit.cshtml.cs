@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using SmartBeauty.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using SmartBeauty.Data;
-using SmartBeauty.Models;
+using System.Threading.Tasks;
 
 namespace SmartBeauty.Pages.Salons
 {
-    public class EditModel : PageModel
+    public class EditModel : CityNamePageModel
     {
         private readonly SmartBeauty.Data.ApplicationDbContext _context;
 
@@ -30,48 +24,40 @@ namespace SmartBeauty.Pages.Salons
                 return NotFound();
             }
 
-            Salon = await _context.Salon.FirstOrDefaultAsync(m => m.SalonID == id);
+            Salon = await _context.Salon
+                .Include(c => c.City).FirstOrDefaultAsync(m => m.SalonID == id);
 
             if (Salon == null)
             {
                 return NotFound();
             }
+
+            // Select current CityID.
+            PopulateCitysDropDownList(_context, Salon.CityID);
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(Salon).State = EntityState.Modified;
+            var SalonToUpdate = await _context.Salon.FindAsync(id);
 
-            try
+            if (await TryUpdateModelAsync<Salon>(
+                 SalonToUpdate,
+                 "Salon",   // Prefix for form value.
+                   c => c.SalonName, c => c.CityID, c => c.PhoneNumber))
             {
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!SalonExists(Salon.SalonID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToPage("./Index");
             }
 
-            return RedirectToPage("./Index");
-        }
-
-        private bool SalonExists(int id)
-        {
-            return _context.Salon.Any(e => e.SalonID == id);
+            // Select CityID if TryUpdateModelAsync fails.
+            PopulateCitysDropDownList(_context, SalonToUpdate.CityID);
+            return Page();
         }
     }
 }

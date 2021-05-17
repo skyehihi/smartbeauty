@@ -33,16 +33,32 @@ namespace SmartBeauty.Models
             context.Client.AddRange(clients);
             context.SaveChanges();
 
+            var city = new City[]
+           {
+            new City{CityName="Vancouver", Province = "BC"},
+            new City{CityName="Burnaby", Province = "BC"},
+            new City{CityName="Richmond", Province = "BC"},
+            new City{CityName="Toronto", Province = "BC"},
+            new City{CityName="Quebec", Province = "BC"},
+            new City{CityName="Waterloo", Province = "BC"},
+            new City{CityName="North Vancouver", Province = "BC"},
+           };
+            foreach (City x in city)
+            {
+                context.City.Add(x);
+            }
+            context.SaveChanges();
+
 
             var salons = new Salon[]
             {
-            new Salon{SalonID=1050,SalonName="Chemistry"},
-            new Salon{SalonID=4022,SalonName="Microeconomics"},
-            new Salon{SalonID=4041,SalonName="Macroeconomics"},
-            new Salon{SalonID=1045,SalonName="Calculus"},
-            new Salon{SalonID=3141,SalonName="Trigonometry"},
-            new Salon{SalonID=2021,SalonName="Composition"},
-            new Salon{SalonID=2042,SalonName="Literature"}
+            new Salon{SalonID=1050,SalonName="Chemistry", CityID  = city.Single( i => i.CityName == "Vancouver").CityID },
+            new Salon{SalonID=4022,SalonName="Microeconomics", CityID  = city.Single( i => i.CityName == "Vancouver").CityID },
+            new Salon{SalonID=4041,SalonName="Macroeconomics", CityID  = city.Single( i => i.CityName == "Vancouver").CityID },
+            new Salon{SalonID=1045,SalonName="Calculus", CityID  = city.Single( i => i.CityName == "Burnaby").CityID },
+            new Salon{SalonID=3141,SalonName="Trigonometry", CityID  = city.Single( i => i.CityName == "Vancouver").CityID },
+            new Salon{SalonID=2021,SalonName="Composition", CityID  = city.Single( i => i.CityName == "Burnaby").CityID },
+            new Salon{SalonID=2042,SalonName="Literature", CityID  = city.Single( i => i.CityName == "Burnaby").CityID },
             };
             foreach (Salon s in salons)
             {
