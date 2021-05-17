@@ -33,17 +33,27 @@ namespace SmartBeauty
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddMvc().AddRazorPagesOptions(options =>
-            {
-                options.Conventions.AuthorizePage("/Clients/Create");
+            services.AddMvc()
+                .AddRazorPagesOptions(options =>
+                {
+                    options.Conventions.AuthorizeFolder("/Staffs");
 
-                options.Conventions.AuthorizePage("/Salons/Create");
+                    options.Conventions.AuthorizeFolder("/Services");
+                    options.Conventions.AuthorizeFolder("/Clients");
 
-                options.Conventions.AllowAnonymousToPage("/Index"); // excluded page
+                    options.Conventions.AuthorizePage("/Appointments/Edit");
+                    options.Conventions.AuthorizePage("/Appointments/Create");
+                    options.Conventions.AuthorizePage("/Appointments/Delete");
+                    options.Conventions.AuthorizePage("/Salons/Edit");
+                    options.Conventions.AuthorizePage("/Salons/Create");
+                    options.Conventions.AuthorizePage("/Salons/Delete");
 
-                options.Conventions.AllowAnonymousToFolder("/Students"); // excluded folder
+                    options.Conventions.AllowAnonymousToPage("/Index"); // excluded page
+                    options.Conventions.AllowAnonymousToPage("/Privacy");
+                    options.Conventions.AllowAnonymousToPage("/Salons/Index");
+                    options.Conventions.AllowAnonymousToFolder("/Appointments/Index"); // excluded folder
+                });
 
-            });
             services.AddRazorPages();
         }
 
