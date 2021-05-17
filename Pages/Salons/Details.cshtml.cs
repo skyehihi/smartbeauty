@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SmartBeauty.Data;
 using SmartBeauty.Models;
@@ -20,7 +19,7 @@ namespace SmartBeauty.Pages.Salons
             _context = context;
         }
 
-        public SmartBeauty.Models.Salon Salon { get; set; }
+        public Salon Salon { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,10 +28,7 @@ namespace SmartBeauty.Pages.Salons
                 return NotFound();
             }
 
-            Salon = await _context.Salon
-                        .Include(s => s.Staffs)
-                        .AsNoTracking()
-                        .FirstOrDefaultAsync(m => m.SalonID == id);
+            Salon = await _context.Salon.FirstOrDefaultAsync(m => m.SalonID == id);
 
             if (Salon == null)
             {

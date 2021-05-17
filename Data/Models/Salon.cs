@@ -12,11 +12,8 @@ namespace SmartBeauty.Models
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
 
-        public int CityID { get; set; }
-
         public ICollection<Appointment> Appointments { get; set; }
         public ICollection<SalonService> SalonServices { get; set; }
         public ICollection<Staff> Staffs { get; set; }
-        public City City { get; set; }
     }
 }

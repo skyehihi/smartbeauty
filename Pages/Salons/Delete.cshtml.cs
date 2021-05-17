@@ -20,29 +20,21 @@ namespace SmartBeauty.Pages.Salons
         }
 
         [BindProperty]
-        public SmartBeauty.Models.Salon Salon { get; set; }
-        public string ErrorMessage { get; set; }
-        public async Task<IActionResult> OnGetAsync(int? id, bool? saveChangesError = false)
+        public Salon Salon { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            Salon = await _context.Salon
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.SalonID == id);
+            Salon = await _context.Salon.FirstOrDefaultAsync(m => m.SalonID == id);
 
             if (Salon == null)
             {
                 return NotFound();
             }
-
-            if (saveChangesError.GetValueOrDefault())
-            {
-                ErrorMessage = "Delete failed. Try again";
-            }
-
             return Page();
         }
 
@@ -53,28 +45,15 @@ namespace SmartBeauty.Pages.Salons
                 return NotFound();
             }
 
-            var student = await _context.Salon
-                            .AsNoTracking()
-                            .FirstOrDefaultAsync(m => m.SalonID == id);
+            Salon = await _context.Salon.FindAsync(id);
 
-            if (student == null)
+            if (Salon != null)
             {
-                return NotFound();
-            }
-
-            try
-            {
-                _context.Salon.Remove(student);
+                _context.Salon.Remove(Salon);
                 await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
-            }
-            catch (DbUpdateException /* ex */)
-            {
-                //Log the error (uncomment ex variable name and write a log.)
-                return RedirectToAction("./Delete",
-                                     new { id, saveChangesError = true });
             }
 
+            return RedirectToPage("./Index");
         }
     }
 }

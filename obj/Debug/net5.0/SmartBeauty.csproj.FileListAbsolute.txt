@@ -325,11 +325,6 @@ D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Clients\Index.cshtml
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Error.cshtml.g.cs
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Index.cshtml.g.cs
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Privacy.cshtml.g.cs
-D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Salons\Create.cshtml.g.cs
-D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Salons\Delete.cshtml.g.cs
-D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Salons\Details.cshtml.g.cs
-D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Salons\Edit.cshtml.g.cs
-D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Salons\Index.cshtml.g.cs
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Shared\_Layout.cshtml.g.cs
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Shared\_LoginPartial.cshtml.g.cs
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Shared\_ValidationScriptsPartial.cshtml.g.cs
@@ -353,3 +348,8 @@ D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Services\Delete.csht
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Services\Details.cshtml.g.cs
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Services\Edit.cshtml.g.cs
 D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Services\Index.cshtml.g.cs
+D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Salons\Create.cshtml.g.cs
+D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Salons\Delete.cshtml.g.cs
+D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Salons\Details.cshtml.g.cs
+D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Salons\Edit.cshtml.g.cs
+D:\Github\skyehihi\smartbeauty\obj\Debug\net5.0\Razor\Pages\Salons\Index.cshtml.g.cs

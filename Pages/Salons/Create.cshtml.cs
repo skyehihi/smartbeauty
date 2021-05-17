@@ -1,10 +1,16 @@
-﻿using SmartBeauty.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using SmartBeauty.Data;
+using SmartBeauty.Models;
 
 namespace SmartBeauty.Pages.Salons
 {
-    public class CreateModel : CityNamePageModel
+    public class CreateModel : PageModel
     {
         private readonly SmartBeauty.Data.ApplicationDbContext _context;
 
@@ -12,15 +18,16 @@ namespace SmartBeauty.Pages.Salons
         {
             _context = context;
         }
+
         public IActionResult OnGet()
         {
-            PopulateCitysDropDownList(_context);
             return Page();
         }
 
         [BindProperty]
         public Salon Salon { get; set; }
 
+        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -28,21 +35,10 @@ namespace SmartBeauty.Pages.Salons
                 return Page();
             }
 
-            var emptySalon = new Salon();
+            _context.Salon.Add(Salon);
+            await _context.SaveChangesAsync();
 
-            if (await TryUpdateModelAsync<Salon>(
-                 emptySalon,
-                 "Salon",   // Prefix for form value.
-                 s => s.SalonName, s => s.Address, s => s.PhoneNumber, s => s.Email))
-            {
-                _context.Salon.Add(emptySalon);
-                await _context.SaveChangesAsync();
-                return RedirectToPage("./Index");
-            }
-
-            // Select DepartmentID if TryUpdateModelAsync fails.
-            PopulateCitysDropDownList(_context, emptySalon.CityID);
-            return Page();
+            return RedirectToPage("./Index");
         }
     }
 }
