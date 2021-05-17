@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartBeauty.Data;
 
 namespace SmartBeauty.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210517131916_skye32")]
+    partial class skye32
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -325,7 +327,12 @@ namespace SmartBeauty.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int?>("ServicePriceServiceID")
+                        .HasColumnType("int");
+
                     b.HasKey("ServiceID");
+
+                    b.HasIndex("ServicePriceServiceID");
 
                     b.ToTable("Service");
                 });
@@ -340,12 +347,7 @@ namespace SmartBeauty.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("money");
 
-                    b.Property<int?>("ServicesServiceID")
-                        .HasColumnType("int");
-
                     b.HasKey("ServiceID");
-
-                    b.HasIndex("ServicesServiceID");
 
                     b.ToTable("ServicePrice");
                 });
@@ -470,13 +472,11 @@ namespace SmartBeauty.Data.Migrations
                     b.Navigation("Services");
                 });
 
-            modelBuilder.Entity("SmartBeauty.Models.ServicePrice", b =>
+            modelBuilder.Entity("SmartBeauty.Models.Service", b =>
                 {
-                    b.HasOne("SmartBeauty.Models.Service", "Services")
-                        .WithMany("ServicePrices")
-                        .HasForeignKey("ServicesServiceID");
-
-                    b.Navigation("Services");
+                    b.HasOne("SmartBeauty.Models.ServicePrice", null)
+                        .WithMany("Serivices")
+                        .HasForeignKey("ServicePriceServiceID");
                 });
 
             modelBuilder.Entity("SmartBeauty.Models.Staff", b =>
@@ -507,8 +507,11 @@ namespace SmartBeauty.Data.Migrations
             modelBuilder.Entity("SmartBeauty.Models.Service", b =>
                 {
                     b.Navigation("SalonServices");
+                });
 
-                    b.Navigation("ServicePrices");
+            modelBuilder.Entity("SmartBeauty.Models.ServicePrice", b =>
+                {
+                    b.Navigation("Serivices");
                 });
 #pragma warning restore 612, 618
         }

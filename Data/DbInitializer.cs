@@ -73,78 +73,84 @@ namespace SmartBeauty.Models
 
             var services = new Service[]
             {
-                new Service { ServiceName = "Man Cut",     Price = 50000, 
-                    SalonID  = salons.Single( i => i.SalonName == "Literature").SalonID },
-                new Service { ServiceName = "Perm", Price = 100000, 
-                    SalonID  = salons.Single( i => i.SalonName == "Microeconomics").SalonID },
-                new Service { ServiceName = "Hair Straighthen", Price = 350000, 
-                    SalonID  = salons.Single( i => i.SalonName == "Microeconomics").SalonID  },
-                new Service { ServiceName = "Hair Color",   Price = 120000,
-                    SalonID  = salons.Single( i => i.SalonName == "Chemistry").SalonID}
+                new Service { ServiceName = "Man Cut" },
+                new Service { ServiceName = "Perm"},
+                new Service { ServiceName = "Hair Straighthen"},
+                new Service { ServiceName = "Hair Color"},
+                //, ,
+                //    SalonID  = salons.Single( i => i.SalonName == "Chemistry").SalonID}
             };
+
 
             context.Services.AddRange(services);
             context.SaveChanges();
 
-            //var salonservices = new SalonService[]
-            //{
-            //    new SalonService {
-            //        SalonID = salons.Single(c => c.SalonName == "Chemistry" ).SalonID,
-            //        ServiceID = services.Single(i => i.ServiceName == "Kapoor").ServiceID
-            //        },
-            //    //new SalonService {
-            //    //    SalonID = salons.Single(c => c.SalonName == "Chemistry" ).SalonID,
-            //    //    ServiceID = services.Single(i => i.ServiceName == "Harui").ServiceID
-            //    //    },
-            //    //new SalonService {
-            //    //    SalonID = salons.Single(c => c.SalonName == "Microeconomics" ).SalonID,
-            //    //    ServiceID = services.Single(i => i.ServiceName == "Zheng").ServiceID
-            //    //    },
-            //    //new SalonService {
-            //    //    SalonID = salons.Single(c => c.SalonName == "Macroeconomics" ).SalonID,
-            //    //    ServiceID = services.Single(i => i.ServiceName == "Zheng").ServiceID
-            //    //    },
-            //    //new SalonService {
-            //    //    SalonID = salons.Single(c => c.SalonName == "Calculus" ).SalonID,
-            //    //    ServiceID = services.Single(i => i.ServiceName == "Fakhouri").ServiceID
-            //    //    },
-            //    //new SalonService {
-            //    //    SalonID = salons.Single(c => c.SalonName == "Trigonometry" ).SalonID,
-            //    //    ServiceID = services.Single(i => i.ServiceName == "Harui").ServiceID
-            //    //    },
-            //    //new SalonService {
-            //    //    SalonID = salons.Single(c => c.SalonName == "Composition" ).SalonID,
-            //    //    ServiceID = services.Single(i => i.ServiceName == "Abercrombie").ServiceID
-            //    //    },
-            //    //new SalonService {
-            //    //    SalonID = salons.Single(c => c.SalonName == "Literature" ).SalonID,
-            //    //    ServiceID = services.Single(i => i.ServiceName == "Abercrombie").ServiceID
-            //    //    },
-            //};
 
-            //context.SalonServices.AddRange(salonservices);
-            //context.SaveChanges();
+            var serviceprices = new ServicePrice[]
+{
+                new ServicePrice { Price = 50000},
+                //, 
+                //    SalonID  = salons.Single( i => i.SalonName == "Literature").SalonID },
+                new ServicePrice {  Price = 100000 },
+                //, , 
+                //    SalonID  = salons.Single( i => i.SalonName == "Microeconomics").SalonID },
+                new ServicePrice { Price = 350000},
+                //, , 
+                //    SalonID  = salons.Single( i => i.SalonName == "Microeconomics").SalonID  },
+                new ServicePrice { Price = 120000 },
+    //, ,
+    //    SalonID  = salons.Single( i => i.SalonName == "Chemistry").SalonID}
+};
+
+
+            context.ServicePrices.AddRange(serviceprices);
+            context.SaveChanges();
+
+            var salonservices = new SalonService[]
+            {
+                new SalonService {
+                    SalonID = salons.Single(c => c.SalonName == "Chemistry" ).SalonID,
+                    ServiceID = services.Single(i => i.ServiceName == "Man Cut").ServiceID
+                    },
+                //new SalonService {
+                //    SalonID = salons.Single(c => c.SalonName == "Chemistry" ).SalonID,
+                //    ServiceID = services.Single(i => i.ServiceName == "Kapoor").ServiceID
+                //    },
+                //new SalonService {
+                //    SalonID = salons.Single(c => c.SalonName == "Chemistry" ).SalonID,
+                //    ServiceID = services.Single(i => i.ServiceName == "Harui").ServiceID
+                //    },
+                //new SalonService {
+                //    SalonID = salons.Single(c => c.SalonName == "Microeconomics" ).SalonID,
+                //    ServiceID = services.Single(i => i.ServiceName == "Zheng").ServiceID
+                //    },
+                //new SalonService {
+                //    SalonID = salons.Single(c => c.SalonName == "Macroeconomics" ).SalonID,
+                //    ServiceID = services.Single(i => i.ServiceName == "Zheng").ServiceID
+                //    },
+                //new SalonService {
+                //    SalonID = salons.Single(c => c.SalonName == "Calculus" ).SalonID,
+                //    ServiceID = services.Single(i => i.ServiceName == "Fakhouri").ServiceID
+                //    },
+                //new SalonService {
+                //    SalonID = salons.Single(c => c.SalonName == "Trigonometry" ).SalonID,
+                //    ServiceID = services.Single(i => i.ServiceName == "Harui").ServiceID
+                //    },
+                //new SalonService {
+                //    SalonID = salons.Single(c => c.SalonName == "Composition" ).SalonID,
+                //    ServiceID = services.Single(i => i.ServiceName == "Abercrombie").ServiceID
+                //    },
+                //new SalonService {
+                //    SalonID = salons.Single(c => c.SalonName == "Literature" ).SalonID,
+                //    ServiceID = services.Single(i => i.ServiceName == "Abercrombie").ServiceID
+                //    },
+            };
+
+            context.SalonService.AddRange(salonservices);
+            context.SaveChanges();
 
             var appointments = new Appointment[]
-            //            {
-            //new Appointment{ClientID=1,SalonID=1050,BookingDate=DateTime.Parse("2021-05-01")},
-            //new Appointment{ClientID=1,SalonID=4022,BookingDate=DateTime.Parse("2021-05-04")},
-            //new Appointment{ClientID=1,SalonID=4041,BookingDate=DateTime.Parse("2021-05-02")},
-            //new Appointment{ClientID=2,SalonID=1045,BookingDate=DateTime.Parse("2021-05-02")},
-            //new Appointment{ClientID=2,SalonID=3141,BookingDate=DateTime.Parse("2021-05-02")},
-            //new Appointment{ClientID=2,SalonID=2021,BookingDate=DateTime.Parse("2021-05-11")},
-            //new Appointment{ClientID=3,SalonID=1050,BookingDate=DateTime.Parse("2021-05-12")},
-            //new Appointment{ClientID=4,SalonID=1050,BookingDate=DateTime.Parse("2021-05-12")},
-            //new Appointment{ClientID=4,SalonID=4022,BookingDate=DateTime.Parse("2021-05-03")},
-            //new Appointment{ClientID=5,SalonID=4041,BookingDate=DateTime.Parse("2021-05-07")},
-            //new Appointment{ClientID=6,SalonID=1045,BookingDate=DateTime.Parse("2021-05-03")},
-            //new Appointment{ClientID=7,SalonID=3141,BookingDate=DateTime.Parse("2021-05-04")},
-            //};
-            //foreach (Appointment a in appointments)
-            //{
-            //    context.Appointment.Add(a);
-            //}
-            //context.SaveChanges();
+
             {
                 new Appointment {
                     ClientID = clients.Single(s => s.LastName == "Alexander").ClientID,

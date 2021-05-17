@@ -1,0 +1,113 @@
+﻿@page "{id:int?}"
+@model SmartBeauty.Pages.Services.IndexModel
+
+@{
+    ViewData["Title"] = "Services";
+}
+
+<h2>Services</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Service Name</th>
+            <th>Service Price</th>
+            <th>Salon Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Service.Services)
+        {
+            string selectedRow = "";
+            if (item.ServiceID == Model.ServiceID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServiceName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServicePrices)
+                </td>
+                <td>
+                    @{
+                        foreach (var salon in item.SalonServices)
+                        {
+                            @salon.Salons.SalonID @:  @salon.Salons.SalonName <br />
+                        }
+                    }
+                </td>
+                <td>
+                    <a asp-page="./Index" asp-route-id="@item.ServiceID">Select</a> |
+                    <a asp-page="./Edit" asp-route-id="@item.ServiceID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ServiceID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ServiceID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.Service.Salons != null)
+{
+    <h3>Salons by Selected Service</h3>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Salon ID</th>
+            <th>Salon Name</th>
+            @*<th>Department</th>*@
+        </tr>
+
+        @foreach (var item in Model.Service.Salons)
+        {
+            string selectedRow = "";
+            if (item.SalonID == Model.SalonID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    <a asp-page="./Index" asp-route-courseID="@item.SalonID">Select</a>
+                </td>
+                <td>
+                    @item.SalonID
+                </td>
+                <td>
+                    @item.SalonName
+                </td>
+                @*<td>
+                    @item.Appointments.
+                </td>*@
+            </tr>
+        }
+
+    </table>
+}
+@if (Model.Service.Appointments != null)
+{
+    <h3>
+        Client Booking in Selected Salon
+    </h3>
+    <table class="table">
+        <tr>
+            <th>Full Name</th>
+            <th>Booking Date</th>
+        </tr>
+        @foreach (var item in Model.Service.Appointments)
+        {
+            <tr>
+                <td>
+                    @item.Client.FullName
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingDate)
+                </td>
+            </tr>
+        }
+    </table>
+}

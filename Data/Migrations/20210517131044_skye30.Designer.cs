@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartBeauty.Data;
 
 namespace SmartBeauty.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210517131044_skye30")]
+    partial class skye30
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -321,6 +323,9 @@ namespace SmartBeauty.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("money");
+
                     b.Property<string>("ServiceName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -328,26 +333,6 @@ namespace SmartBeauty.Data.Migrations
                     b.HasKey("ServiceID");
 
                     b.ToTable("Service");
-                });
-
-            modelBuilder.Entity("SmartBeauty.Models.ServicePrice", b =>
-                {
-                    b.Property<int>("ServiceID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("money");
-
-                    b.Property<int?>("ServicesServiceID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ServiceID");
-
-                    b.HasIndex("ServicesServiceID");
-
-                    b.ToTable("ServicePrice");
                 });
 
             modelBuilder.Entity("SmartBeauty.Models.Staff", b =>
@@ -470,15 +455,6 @@ namespace SmartBeauty.Data.Migrations
                     b.Navigation("Services");
                 });
 
-            modelBuilder.Entity("SmartBeauty.Models.ServicePrice", b =>
-                {
-                    b.HasOne("SmartBeauty.Models.Service", "Services")
-                        .WithMany("ServicePrices")
-                        .HasForeignKey("ServicesServiceID");
-
-                    b.Navigation("Services");
-                });
-
             modelBuilder.Entity("SmartBeauty.Models.Staff", b =>
                 {
                     b.HasOne("SmartBeauty.Models.Salon", "Salons")
@@ -507,8 +483,6 @@ namespace SmartBeauty.Data.Migrations
             modelBuilder.Entity("SmartBeauty.Models.Service", b =>
                 {
                     b.Navigation("SalonServices");
-
-                    b.Navigation("ServicePrices");
                 });
 #pragma warning restore 612, 618
         }

@@ -13,7 +13,7 @@ namespace SmartBeauty.Models
         public string PhoneNumber { get; set; }
 
         public ICollection<Appointment> Appointments { get; set; }
-        public ICollection<Service> Services { get; set; }
+        public ICollection<SalonService> SalonServices { get; set; }
         public ICollection<Staff> Staffs { get; set; }
     }
 }
