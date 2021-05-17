@@ -1,8 +1,12 @@
 ﻿@page
 @model SmartBeauty.Pages.Clients.CreateModel
+@using System.Security.Claims;
+
 
 @{
     ViewData["Title"] = "Create";
+    string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
 }
 
 <h1>Create</h1>
@@ -43,6 +47,7 @@
                 <input asp-for="Client.PhoneNumber" class="form-control" />
                 <span asp-validation-for="Client.PhoneNumber" class="text-danger"></span>
             </div>
+            <input type="hidden" asp-for="Client.IdentityID" value=@userId />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

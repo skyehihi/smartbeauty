@@ -8,6 +8,10 @@ namespace SmartBeauty.Models
     public class Client
     {
         public int ClientID { get; set; }
+        
+        [StringLength(450)]
+        public string IdentityID { get; set; }
+
         [Required]
 
         [StringLength(50)]

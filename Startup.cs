@@ -33,6 +33,17 @@ namespace SmartBeauty
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddMvc().AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizePage("/Clients/Create");
+
+                options.Conventions.AuthorizePage("/Salons/Create");
+
+                options.Conventions.AllowAnonymousToPage("/Index"); // excluded page
+
+                options.Conventions.AllowAnonymousToFolder("/Students"); // excluded folder
+
+            });
             services.AddRazorPages();
         }
 

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SmartBeauty.Data;
 using SmartBeauty.Models;
+using System.Security.Claims;
+
 
 namespace SmartBeauty.Pages.Salons
 {
@@ -21,6 +23,13 @@ namespace SmartBeauty.Pages.Salons
 
         public IActionResult OnGet()
         {
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId != "332ea6a5-41b4-4d87-86a2-d2fa39d685ab")
+            {
+                return Redirect("~/Identity/Account/Login");
+            }
+
             return Page();
         }
 
